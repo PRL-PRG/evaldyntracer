@@ -1,0 +1,12 @@
+Package: evaldyntracer
+Version: 0.0.1
+Title: An R package for tracing eval
+Description: This package instruments and studies usage of eval in R code.
+Authors@R: person("Aviral", "Goel", email="example@email.com", role=c("aut", "cre"))
+License: GPL-2
+Encoding: UTF-8
+LazyData: true
+ByteCompile: true
+Imports:
+Remotes:
+Suggests: 
