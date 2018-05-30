@@ -5,10 +5,10 @@
 extern "C" {
 #endif
 
-#include <Rinternals.h>
-#include <Rdyntrace.h>
+#include "Rincludes.h"
 
-SEXP create_dyntracer();
+SEXP create_dyntracer(SEXP evals, SEXP raw_analysis_dirpath,
+                      SEXP analysis_flags, SEXP verbose);
 
 SEXP destroy_dyntracer(SEXP dyntracer);
 

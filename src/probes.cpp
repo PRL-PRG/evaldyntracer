@@ -1,28 +1,33 @@
 #include "probes.h"
 
 void probe_dyntrace_entry(dyntracer_t *dyntracer, SEXP expression,
-                          SEXP environment) {}
+                          SEXP environment) {
+    verbose_log_info(configuration(dyntracer).is_verbose(), "\n%s",
+                     std::string(configuration(dyntracer)).c_str());
+}
 
 void probe_dyntrace_exit(dyntracer_t *dyntracer, SEXP expression,
                          SEXP environment, SEXP result, int error) {}
 
 void probe_closure_entry(dyntracer_t *dyntracer, const SEXP call, const SEXP op,
-                         const SEXP rho) {}
+                         const SEXP args, const SEXP rho) {
+    analysis_driver(dyntracer).closure_entry(call, op, args, rho);
+}
 
 void probe_closure_exit(dyntracer_t *dyntracer, const SEXP call, const SEXP op,
-                        const SEXP rho, const SEXP retval) {}
+                        const SEXP args, const SEXP rho, const SEXP retval) {}
 
 void probe_builtin_entry(dyntracer_t *dyntracer, const SEXP call, const SEXP op,
-                         const SEXP rho) {}
+                         const SEXP args, const SEXP rho) {}
 
 void probe_builtin_exit(dyntracer_t *dyntracer, const SEXP call, const SEXP op,
-                        const SEXP rho, const SEXP retval) {}
+                        const SEXP args, const SEXP rho, const SEXP retval) {}
 
 void probe_special_entry(dyntracer_t *dyntracer, const SEXP call, const SEXP op,
-                         const SEXP rho) {}
+                         const SEXP args, const SEXP rho) {}
 
 void probe_special_exit(dyntracer_t *dyntracer, const SEXP call, const SEXP op,
-                        const SEXP rho, const SEXP retval) {}
+                        const SEXP args, const SEXP rho, const SEXP retval) {}
 
 void probe_promise_force_entry(dyntracer_t *dyntracer, const SEXP promise) {}
 
