@@ -1,12 +1,16 @@
 #include "tracer.h"
+#include "State.h"
 #include "probes.h"
-#include <iostream>
-SEXP create_dyntracer() {
+
+SEXP create_dyntracer(SEXP evals, SEXP raw_analysis_dirpath,
+                      SEXP analysis_flags, SEXP verbose) {
 
     /* calloc initializes the memory to zero. This ensures that probes not
        attached will be NULL. Replacing calloc with malloc will cause
        segfaults. */
     dyntracer_t *dyntracer = (dyntracer_t *)calloc(1, sizeof(dyntracer_t));
+    dyntracer->state = new State(
+        Configuration(evals, raw_analysis_dirpath, analysis_flags, verbose));
 
     dyntracer->probe_dyntrace_entry = probe_dyntrace_entry;
     dyntracer->probe_dyntrace_exit = probe_dyntrace_exit;
@@ -40,11 +44,16 @@ SEXP create_dyntracer() {
     dyntracer->probe_context_jump = probe_context_jump;
     dyntracer->probe_context_exit = probe_context_exit;
 
-    dyntracer->probe_environment_variable_define = probe_environment_variable_define;
-    dyntracer->probe_environment_variable_assign = probe_environment_variable_assign;
-    dyntracer->probe_environment_variable_remove = probe_environment_variable_remove;
-    dyntracer->probe_environment_variable_lookup = probe_environment_variable_lookup;
-    dyntracer->probe_environment_variable_exists = probe_environment_variable_exists;
+    dyntracer->probe_environment_variable_define =
+        probe_environment_variable_define;
+    dyntracer->probe_environment_variable_assign =
+        probe_environment_variable_assign;
+    dyntracer->probe_environment_variable_remove =
+        probe_environment_variable_remove;
+    dyntracer->probe_environment_variable_lookup =
+        probe_environment_variable_lookup;
+    dyntracer->probe_environment_variable_exists =
+        probe_environment_variable_exists;
 
     return dyntracer_to_sexp(dyntracer, "evaldyntracer");
 }
@@ -54,6 +63,8 @@ static void destroy_evaldyntracer(dyntracer_t *dyntracer) {
        this check ensures that multiple calls to destroy_dyntracer on the same
        object do not crash the process. */
     if (dyntracer) {
+        State *state = static_cast<State *>(dyntracer->state);
+        delete state;
         free(dyntracer);
     }
 }

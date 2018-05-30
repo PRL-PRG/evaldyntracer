@@ -2,7 +2,17 @@
 #define __PROBES_H__
 
 #define R_INLINES_H_
+#include "State.h"
+#include "utilities.h"
 #include <Rdyntrace.h>
+
+inline const Configuration &configuration(dyntracer_t *dyntracer) {
+    return static_cast<State *>(dyntracer->state)->get_configuration();
+}
+
+inline AnalysisDriver &analysis_driver(dyntracer_t *dyntracer) {
+    return static_cast<State *>(dyntracer->state)->get_analysis_driver();
+}
 
 void probe_dyntrace_entry(dyntracer_t *dyntracer, SEXP expression,
                           SEXP environment);
@@ -11,22 +21,22 @@ void probe_dyntrace_exit(dyntracer_t *dyntracer, SEXP expression,
                          SEXP environment, SEXP result, int error);
 
 void probe_closure_entry(dyntracer_t *dyntracer, const SEXP call, const SEXP op,
-                         const SEXP rho);
+                         const SEXP args, const SEXP rho);
 
 void probe_closure_exit(dyntracer_t *dyntracer, const SEXP call, const SEXP op,
-                        const SEXP rho, const SEXP retval);
+                        const SEXP args, const SEXP rho, const SEXP retval);
 
 void probe_builtin_entry(dyntracer_t *dyntracer, const SEXP call, const SEXP op,
-                         const SEXP rho);
+                         const SEXP args, const SEXP rho);
 
 void probe_builtin_exit(dyntracer_t *dyntracer, const SEXP call, const SEXP op,
-                        const SEXP rho, const SEXP retval);
+                        const SEXP args, const SEXP rho, const SEXP retval);
 
 void probe_special_entry(dyntracer_t *dyntracer, const SEXP call, const SEXP op,
-                         const SEXP rho);
+                         const SEXP args, const SEXP rho);
 
 void probe_special_exit(dyntracer_t *dyntracer, const SEXP call, const SEXP op,
-                        const SEXP rho, const SEXP retval);
+                        const SEXP args, const SEXP rho, const SEXP retval);
 
 void probe_promise_force_entry(dyntracer_t *dyntracer, const SEXP promise);
 

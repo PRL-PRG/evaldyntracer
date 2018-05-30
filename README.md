@@ -3,23 +3,54 @@
  
  An R package for tracing eval.
  
-## Installation
+First, you need to setup [R-dyntrace](https://github.com/PRL-PRG/R-dyntrace).
 
-First, you need to setup [R-dyntrace](https://github.com/PRL-PRG/R-dyntrace)
-Then, install `evaldyntracer` for `R-dyntrace` by running the following command on the console:
+If you are not a developer, you can install `evaldyntracer` by running the 
+following commands on the console:
 ```
 $ R-dyntrace/bin/R
 
 > library(devtools)
 > install_github('PRL-PRG/evaldyntracer')
 ```
-## Development
 
-If you are a developer, fork the project and make changes to your copy.
-Install your local copy by running the following command inside the
-project root directory:
-
-`R-dyntrace/bin/R CMD INSTALL --build --with-keep.source .`
-
-After you are done making your changes, push to your fork and send a pull request.
+If you are a developer, fork the project and make changes to your copy. 
+After you are done making your changes, push to your fork and send a pull request. 
 Make sure your pull request passes all the tests.
+
+
+## Install dependencies
+To install all the package development dependencies, execute the following command -
+```
+$ make install-dependencies R_DYNTRACE_HOME = <R_DYNTRACE_HOME>
+```
+
+## Build
+To build the source package, execute the following command -
+```
+$ make build R_DYNTRACE_HOME = <R_DYNTRACE_HOME>
+```
+
+## Install
+To install the package, execute the following command -
+```
+$ make install R_DYNTRACE_HOME = <R_DYNTRACE_HOME>
+```
+
+## Document
+To generate documentation for the package, execute the following command -
+```
+$ make document R_DYNTRACE_HOME = <R_DYNTRACE_HOME>
+```
+
+## Check
+To perform all checks on the package, execute the following command -
+```
+$ make check R_DYNTRACE_HOME = <R_DYNTRACE_HOME>
+```
+
+## Test
+To run tests on the package, execute the following command -
+```
+$ make test R_DYNTRACE_HOME = <R_DYNTRACE_HOME>
+```

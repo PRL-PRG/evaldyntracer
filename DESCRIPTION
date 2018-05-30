@@ -1,12 +1,28 @@
 Package: evaldyntracer
-Version: 0.0.1
+Version: 0.1.0
 Title: An R package for tracing eval
 Description: This package instruments and studies usage of eval in R code.
-Authors@R: person("Aviral", "Goel", email="example@email.com", role=c("aut", "cre"))
-License: GPL-2
+Authors@R: c(person("Aviral", "Goel", email="goel.aviral@gmail.com", role=c("aut", "cre")),
+             person("Filip", "Krikava", email="krikava@gmail.com", role="aut"),
+             person("Chakshu", "Goyal", email="chakshugoyal97@gmail.com", role="aut"))
+Author: Aviral Goel [aut, cre],
+        Filip Krikava [aut],
+        Chakshu Goyal [aut]
+Maintainer: Aviral Goel <goel.aviral@gmail.com>,
+            Filip Krikava <krikava@gmail.com>,
+            Chakshu Goyal <chakshugoyal97@gmail.com>
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-ByteCompile: true
-Imports:
-Remotes:
-Suggests: 
+ByteCompile: false
+Suggests:
+    devtools,
+    testthat,
+    withr,
+    roxygen2
+RoxygenNote: 6.0.1
+Collate:
+    'evaldyntracer.R'
+    'create_dyntracer.R'
+    'destroy_dyntracer.R'
+    'dyntrace_evals.R'
