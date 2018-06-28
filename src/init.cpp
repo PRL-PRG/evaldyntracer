@@ -1,10 +1,10 @@
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #include <R_ext/Rdynload.h>
 #include <R_ext/Visibility.h>
 #include "tracer.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 static const R_CallMethodDef CallEntries[] = {
   {"create_dyntracer", (DL_FUNC) &create_dyntracer, 4},

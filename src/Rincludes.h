@@ -1,11 +1,6 @@
 #ifndef __R_INCLUDES_H__
 #define __R_INCLUDES_H__
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-  //#include <R.h>
 #define USE_RINTERNALS
 #include <Rinternals.h>
 #undef TRUE
@@ -21,9 +16,5 @@ extern "C" {
 
 #include <Defn.h>
 #include <Rdyntrace.h>
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* __R_INCLUDES_H__ */

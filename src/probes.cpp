@@ -1,13 +1,19 @@
 #include "probes.h"
 
-void probe_dyntrace_entry(dyntracer_t *dyntracer, SEXP expression,
-                          SEXP environment) {
+void probe_dyntrace_entry(dyntracer_t *dyntracer, const SEXP expression,
+                          const SEXP environment) {
     verbose_log_info(configuration(dyntracer).is_verbose(), "\n%s",
                      std::string(configuration(dyntracer)).c_str());
+
+    analysis_driver(dyntracer).dyntrace_entry(expression, environment);
 }
 
-void probe_dyntrace_exit(dyntracer_t *dyntracer, SEXP expression,
-                         SEXP environment, SEXP result, int error) {}
+void probe_dyntrace_exit(dyntracer_t *dyntracer, const SEXP expression,
+                         const SEXP environment, const SEXP result,
+                         const int error) {
+    analysis_driver(dyntracer).dyntrace_exit(expression, environment, result,
+                                             error);
+}
 
 void probe_closure_entry(dyntracer_t *dyntracer, const SEXP call, const SEXP op,
                          const SEXP args, const SEXP rho) {
@@ -15,19 +21,29 @@ void probe_closure_entry(dyntracer_t *dyntracer, const SEXP call, const SEXP op,
 }
 
 void probe_closure_exit(dyntracer_t *dyntracer, const SEXP call, const SEXP op,
-                        const SEXP args, const SEXP rho, const SEXP retval) {}
+                        const SEXP args, const SEXP rho, const SEXP retval) {
+    analysis_driver(dyntracer).closure_exit(call, op, args, rho, retval);
+}
 
 void probe_builtin_entry(dyntracer_t *dyntracer, const SEXP call, const SEXP op,
-                         const SEXP args, const SEXP rho) {}
+                         const SEXP args, const SEXP rho) {
+    analysis_driver(dyntracer).builtin_entry(call, op, args, rho);
+}
 
 void probe_builtin_exit(dyntracer_t *dyntracer, const SEXP call, const SEXP op,
-                        const SEXP args, const SEXP rho, const SEXP retval) {}
+                        const SEXP args, const SEXP rho, const SEXP retval) {
+    analysis_driver(dyntracer).builtin_exit(call, op, args, rho, retval);
+}
 
 void probe_special_entry(dyntracer_t *dyntracer, const SEXP call, const SEXP op,
-                         const SEXP args, const SEXP rho) {}
+                         const SEXP args, const SEXP rho) {
+    analysis_driver(dyntracer).special_entry(call, op, args, rho);
+}
 
 void probe_special_exit(dyntracer_t *dyntracer, const SEXP call, const SEXP op,
-                        const SEXP args, const SEXP rho, const SEXP retval) {}
+                        const SEXP args, const SEXP rho, const SEXP retval) {
+    analysis_driver(dyntracer).special_exit(call, op, args, rho, retval);
+}
 
 void probe_promise_force_entry(dyntracer_t *dyntracer, const SEXP promise) {}
 

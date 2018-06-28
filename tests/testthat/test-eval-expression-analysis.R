@@ -27,46 +27,46 @@ test_that_in_temp_dir("eval expression analysis captures all members of the 'eva
         local(x + y)
     }, analysis_dirpath, verbose = FALSE)
 
-    eval_expression_table <- read.csv(file.path(analysis_dirpath, "eval-expressions.csv"),
+    eval_expression_table <- read.csv(file.path(analysis_dirpath, "eval-expressions.tdf"),
                                       sep = "#",
                                       stringsAsFactors = FALSE)
 
     expect_gte(nrow(eval_expression_table), 9)
 
     expect_equal(nrow(subset(eval_expression_table,
-                             function_name == "base::eval" &
+                             eval_type == "base::eval" &
                              expression == "quote(1 + 2 + 3)")), 1)
 
     expect_equal(nrow(subset(eval_expression_table,
-                             function_name == "base::eval" &
+                             eval_type == "base::eval" &
                              expression == "quote(eval.parent(evalq(x + y)))")), 1)
 
     expect_equal(nrow(subset(eval_expression_table,
-                             function_name == "base::eval" &
+                             eval_type == "base::eval" &
                              expression == "quote(eval.parent(get(paste0(a, b))) + eval(5))")), 1)
 
     expect_equal(nrow(subset(eval_expression_table,
-                             function_name == "base::eval" &
+                             eval_type == "base::eval" &
                              expression == "5")), 1)
 
     expect_equal(nrow(subset(eval_expression_table,
-                             function_name == "base::evalq" &
+                             eval_type == "base::evalq" &
                              expression == "a")), 1)
 
     expect_equal(nrow(subset(eval_expression_table,
-                             function_name == "base::evalq" &
+                             eval_type == "base::evalq" &
                              expression == "x + y")), 1)
 
     expect_equal(nrow(subset(eval_expression_table,
-                             function_name == "base::eval.parent" &
+                             eval_type == "base::eval.parent" &
                              expression == "evalq(x + y)")), 1)
 
     expect_equal(nrow(subset(eval_expression_table,
-                             function_name == "base::eval.parent" &
+                             eval_type == "base::eval.parent" &
                              expression == "get(paste0(a, b))")), 1)
 
     expect_equal(nrow(subset(eval_expression_table,
-                             function_name == "base::local" &
+                             eval_type == "base::local" &
                              expression == "x + y")), 1)
 })
 
@@ -91,45 +91,45 @@ test_that_in_temp_dir("eval expression analysis captures aliased members of the 
         bl(x + y)
     }, analysis_dirpath, verbose = FALSE)
 
-    eval_expression_table <- read.csv(file.path(analysis_dirpath, "eval-expressions.csv"),
+    eval_expression_table <- read.csv(file.path(analysis_dirpath, "eval-expressions.tdf"),
                                       sep = "#",
                                       stringsAsFactors = FALSE)
 
     expect_gte(nrow(eval_expression_table), 9)
 
     expect_equal(nrow(subset(eval_expression_table,
-                             function_name == "base::eval" &
+                             eval_type == "base::eval" &
                              expression == "quote(1 + 2 + 3)")), 1)
 
     expect_equal(nrow(subset(eval_expression_table,
-                             function_name == "base::eval" &
+                             eval_type == "base::eval" &
                              expression == "quote(bep(beq(x + y)))")), 1)
 
     expect_equal(nrow(subset(eval_expression_table,
-                             function_name == "base::eval" &
+                             eval_type == "base::eval" &
                              expression == "quote(bep(get(paste0(a, b))) + be(5))")), 1)
 
     expect_equal(nrow(subset(eval_expression_table,
-                             function_name == "base::eval" &
+                             eval_type == "base::eval" &
                              expression == "5")), 1)
 
     expect_equal(nrow(subset(eval_expression_table,
-                             function_name == "base::evalq" &
+                             eval_type == "base::evalq" &
                              expression == "a")), 1)
 
     expect_equal(nrow(subset(eval_expression_table,
-                             function_name == "base::evalq" &
+                             eval_type == "base::evalq" &
                              expression == "x + y")), 1)
 
     expect_equal(nrow(subset(eval_expression_table,
-                             function_name == "base::eval.parent" &
+                             eval_type == "base::eval.parent" &
                              expression == "beq(x + y)")), 1)
 
     expect_equal(nrow(subset(eval_expression_table,
-                             function_name == "base::eval.parent" &
+                             eval_type == "base::eval.parent" &
                              expression == "get(paste0(a, b))")), 1)
 
     expect_equal(nrow(subset(eval_expression_table,
-                             function_name == "base::local" &
+                             eval_type == "base::local" &
                              expression == "x + y")), 1)
 })
