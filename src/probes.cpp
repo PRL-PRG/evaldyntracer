@@ -81,12 +81,18 @@ void probe_gc_unmark(dyntracer_t *dyntracer, const SEXP object) {}
 
 void probe_gc_allocate(dyntracer_t *dyntracer, const SEXP object) {}
 
-void probe_context_entry(dyntracer_t *dyntracer, const RCNTXT *context) {}
+void probe_context_entry(dyntracer_t *dyntracer, const RCNTXT *context) {
+    analysis_driver(dyntracer).context_entry(context);
+}
 
-void probe_context_exit(dyntracer_t *dyntracer, const RCNTXT *context) {}
+void probe_context_exit(dyntracer_t *dyntracer, const RCNTXT *context) {
+    analysis_driver(dyntracer).context_exit(context);
+}
 
 void probe_context_jump(dyntracer_t *dyntracer, const RCNTXT *context,
-                        const SEXP return_value, int restart) {}
+                        const SEXP return_value, int restart) {
+    analysis_driver(dyntracer).context_jump(context, return_value, restart);
+}
 
 void probe_S3_generic_entry(dyntracer_t *dyntracer, const char *generic,
                             const SEXP object) {}

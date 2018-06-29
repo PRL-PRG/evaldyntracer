@@ -1,20 +1,20 @@
 #ifndef __FUNCTION_EXECUTION_CONTEXT_H__
 #define __FUNCTION_EXECUTION_CONTEXT_H__
 
+#include "ExecutionContext.h"
 #include "sexptype.h"
 #include <Rinternals.h>
 
-class FunctionExecutionContext {
+class FunctionExecutionContext : public ExecutionContext {
   public:
     explicit FunctionExecutionContext(const SEXP call, const SEXP op,
                                       const SEXP args, const SEXP rho)
-        : call_{call}, op_{op}, args_{args}, rho_{rho} {}
+        : ExecutionContext{}, call_{call}, op_{op}, args_{args}, rho_{rho},
+          return_value_{nullptr} {}
 
     const SEXP get_call() const { return call_; }
 
     const SEXP get_function() const { return op_; }
-
-    const sexptype_t get_type() const { return TYPEOF(op_); }
 
     const SEXP get_arguments() const { return args_; }
 
@@ -31,15 +31,22 @@ class FunctionExecutionContext {
         return argument;
     }
 
-    const std::string get_name() const {
+    const std::string get_name() const override {
         return std::string(serialize_sexp(CAR(call_)));
     }
+
+    void set_return_value(SEXP return_value) { return_value_ = return_value; }
+
+    const SEXP get_return_value() const { return return_value_; }
+
+    virtual ~FunctionExecutionContext() {}
 
   private:
     const SEXP call_;
     const SEXP op_;
     const SEXP args_;
     const SEXP rho_;
+    SEXP return_value_;
 };
 
 #endif /* __FUNCTION_EXECUTION_CONTEXT_H__ */

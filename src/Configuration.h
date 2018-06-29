@@ -31,10 +31,6 @@ class Configuration {
         return eval_expression_analysis_enabled_;
     }
 
-    bool is_execution_context_stack_needed() const {
-        return eval_expression_analysis_enabled_;
-    }
-
     const std::string &get_raw_analysis_dirpath() const {
         return raw_analysis_dirpath_;
     }

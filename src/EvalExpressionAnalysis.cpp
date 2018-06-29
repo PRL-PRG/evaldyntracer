@@ -4,7 +4,7 @@ EvalExpressionAnalysis::EvalExpressionAnalysis(
     const Configuration &configuration,
     std::shared_ptr<ExecutionContextStack> execution_context_stack)
     : configuration_{configuration},
-      execution_context_stack_{execution_context_stack},
+      execution_context_stack_{std::move(execution_context_stack)},
       expression_table_writer_{configuration.get_raw_analysis_dirpath() + "/" +
                                    "eval-expressions.tdf",
                                {"eval_type", "caller", "caller_type",
@@ -12,7 +12,7 @@ EvalExpressionAnalysis::EvalExpressionAnalysis(
                                 "expression"}} {}
 
 void EvalExpressionAnalysis::closure_entry(
-    const FunctionExecutionContext &context) {
+    const ClosureExecutionContext &context) {
 
     for (auto &key_value : configuration_.get_evals()) {
 
@@ -32,19 +32,14 @@ void EvalExpressionAnalysis::closure_entry(
             sexptype_t type = TYPEOF(value);
             SEXP function = R_NilValue;
 
-            if (type == LANGSXP)
+            if (type == LANGSXP) {
                 function = CAR(value);
+            }
 
-            const std::string caller_name{std::visit(
-                [](auto &&arg) -> std::string { return arg.get_name(); },
-                execution_context_stack_->peek())};
-
-            const std::string caller_type{sexptype_to_string(std::visit(
-                [](auto &&arg) -> sexptype_t { return arg.get_type(); },
-                execution_context_stack_->peek()))};
+            const auto[caller_name, caller_type] = get_caller_information();
 
             expression_table_writer_.write_row(
-                eval_name, caller_name, caller_type,
+                eval_name, caller_name, sexptype_to_string(caller_type),
                 std::string(serialize_sexp(context.get_call())),
                 std::string(serialize_sexp(function)), sexptype_to_string(type),
                 std::string(serialize_sexp(value)));
@@ -52,4 +47,26 @@ void EvalExpressionAnalysis::closure_entry(
             break;
         }
     }
+}
+
+std::tuple<std::string, sexptype_t>
+EvalExpressionAnalysis::get_caller_information() {
+    std::string caller_name;
+    sexptype_t caller_type;
+
+    auto last_context =
+        execution_context_stack_->get_last_execution_context(CLOSXP);
+
+    if (last_context) {
+        auto closure_context = std::get<ClosureExecutionContext>(*last_context);
+        caller_name = closure_context.get_name();
+        caller_type = closure_context.get_type();
+    } else {
+        auto top_level_context =
+            execution_context_stack_->get_top_level_execution_context();
+        caller_name = top_level_context.get_name();
+        caller_type = top_level_context.get_type();
+    }
+
+    return std::make_tuple(caller_name, caller_type);
 }

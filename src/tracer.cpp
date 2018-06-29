@@ -8,7 +8,8 @@ SEXP create_dyntracer(SEXP evals, SEXP raw_analysis_dirpath,
     /* calloc initializes the memory to zero. This ensures that probes not
        attached will be NULL. Replacing calloc with malloc will cause
        segfaults. */
-    dyntracer_t *dyntracer = (dyntracer_t *)calloc(1, sizeof(dyntracer_t));
+    auto dyntracer = static_cast<dyntracer_t *>(calloc(1, sizeof(dyntracer_t)));
+
     dyntracer->state = new State(
         Configuration(evals, raw_analysis_dirpath, analysis_flags, verbose));
 
@@ -62,8 +63,8 @@ static void destroy_evaldyntracer(dyntracer_t *dyntracer) {
     /* free dyntracer iff it has not already been freed.
        this check ensures that multiple calls to destroy_dyntracer on the same
        object do not crash the process. */
-    if (dyntracer) {
-        State *state = static_cast<State *>(dyntracer->state);
+    if (dyntracer != nullptr) {
+        auto state = static_cast<State *>(dyntracer->state);
         delete state;
         free(dyntracer);
     }

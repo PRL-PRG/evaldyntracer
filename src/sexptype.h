@@ -3,9 +3,10 @@
 
 #include <Rinternals.h>
 
-typedef int sexptype_t;
+using sexptype_t = int;
 
 const int TOPLEVELSXP = 10001;
+const int RCNTXTSXP = 10002;
 
 inline std::string sexptype_to_string(const sexptype_t sexptype) {
     switch (sexptype) {

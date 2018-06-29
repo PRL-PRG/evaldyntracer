@@ -34,6 +34,13 @@ class AnalysisDriver {
     void special_exit(const SEXP call, const SEXP op, const SEXP args,
                       const SEXP rho, const SEXP retval);
 
+    void context_entry(const RCNTXT *rcontext);
+
+    void context_exit(const RCNTXT *rcontext);
+
+    void context_jump(const RCNTXT *context, const SEXP return_value,
+                      int restart);
+
   private:
     const Configuration configuration_;
     std::shared_ptr<ExecutionContextStack> execution_context_stack_;
