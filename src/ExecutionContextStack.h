@@ -47,7 +47,6 @@ class ExecutionContextStack {
             execution_context_t temp_context{pop()};
 
             if (std::holds_alternative<RExecutionContext>(temp_context)) {
-
                 if (context == std::get<RExecutionContext>(temp_context)) {
                     push(temp_context);
                     return unwound_contexts;
@@ -59,14 +58,17 @@ class ExecutionContextStack {
         dyntrace_log_error("cannot find matching execution context\n");
     }
 
-    std::optional<execution_context_t>
-    get_last_execution_context(sexptype_t type) const {
+    template <typename T>
+    std::optional<T> get_last_execution_context(sexptype_t type) const {
         sexptype_t current_type;
+
         for (const_reverse_iterator iter = crbegin(); iter != crend(); ++iter) {
+
             current_type = std::visit(
                 [](auto &&arg) -> sexptype_t { return arg.get_type(); }, *iter);
+
             if (current_type == type)
-                return *iter;
+                return std::get<T>(*iter);
         }
         return {};
     }

@@ -21,6 +21,11 @@ inline int index_real_rvector(const SEXP rvector, size_t index = 0) {
     return REAL(rvector)[index];
 }
 
+inline unsigned int index_integer_rvector(const SEXP rvector,
+                                          size_t index = 0) {
+    return INTEGER(rvector)[index];
+}
+
 inline std::string index_character_rvector(const SEXP rvector,
                                            size_t index = 0) {
     return std::string(CHAR(STRING_ELT(rvector, index)));
@@ -55,6 +60,16 @@ rlist_to_map(SEXP rlist, std::function<Value(SEXP)> transformer) {
             transformer(VECTOR_ELT(rlist, index));
     }
     return mapping;
+}
+
+inline void
+transform_rlist(SEXP rlist,
+                std::function<void(std::string, SEXP)> accumulator) {
+    SEXP keys = getAttrib(rlist, R_NamesSymbol);
+    for (int index = 0; index < LENGTH(rlist); ++index) {
+        accumulator(index_character_rvector(keys, index),
+                    VECTOR_ELT(rlist, index));
+    }
 }
 
 #endif /* __UTILITIES_H__ **/

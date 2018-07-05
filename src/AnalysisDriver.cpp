@@ -41,6 +41,10 @@ void AnalysisDriver::closure_exit(const SEXP call, const SEXP op,
     ClosureExecutionContext context{
         std::get<ClosureExecutionContext>(execution_context_stack_->pop())};
     context.set_return_value(retval);
+
+    if (configuration_.is_eval_expression_analysis_enabled()) {
+        eval_expression_analysis_.closure_exit(context);
+    }
 }
 
 void AnalysisDriver::builtin_entry(const SEXP call, const SEXP op,
@@ -48,6 +52,10 @@ void AnalysisDriver::builtin_entry(const SEXP call, const SEXP op,
 
     BuiltinExecutionContext context{call, op, args, rho};
     execution_context_stack_->push(context);
+
+    if (configuration_.is_eval_expression_analysis_enabled()) {
+        eval_expression_analysis_.builtin_entry(context);
+    }
 }
 
 void AnalysisDriver::builtin_exit(const SEXP call, const SEXP op,
@@ -64,6 +72,10 @@ void AnalysisDriver::special_entry(const SEXP call, const SEXP op,
 
     SpecialExecutionContext context{call, op, args, rho};
     execution_context_stack_->push(context);
+
+    if (configuration_.is_eval_expression_analysis_enabled()) {
+        eval_expression_analysis_.special_entry(context);
+    }
 }
 
 void AnalysisDriver::special_exit(const SEXP call, const SEXP op,
@@ -88,4 +100,8 @@ void AnalysisDriver::context_jump(const RCNTXT *context,
                                   const SEXP return_value, int restart) {
     execution_contexts_t unwound_contexts{
         execution_context_stack_->unwind(RExecutionContext{context})};
+
+    if (configuration_.is_eval_expression_analysis_enabled()) {
+        eval_expression_analysis_.context_jump(unwound_contexts);
+    }
 }
