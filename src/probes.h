@@ -1,5 +1,5 @@
-#ifndef __PROBES_H__
-#define __PROBES_H__
+#ifndef EVALDYNTRACER_PROBES_H
+#define EVALDYNTRACER_PROBES_H
 
 #define R_INLINES_H_
 #include "State.h"
@@ -14,11 +14,12 @@ inline AnalysisDriver &analysis_driver(dyntracer_t *dyntracer) {
     return static_cast<State *>(dyntracer->state)->get_analysis_driver();
 }
 
-void probe_dyntrace_entry(dyntracer_t *dyntracer, SEXP expression,
-                          SEXP environment);
+void probe_dyntrace_entry(dyntracer_t *dyntracer, const SEXP expression,
+                          const SEXP environment);
 
-void probe_dyntrace_exit(dyntracer_t *dyntracer, SEXP expression,
-                         SEXP environment, SEXP result, int error);
+void probe_dyntrace_exit(dyntracer_t *dyntracer, const SEXP expression,
+                         const SEXP environment, const SEXP result,
+                         const int error);
 
 void probe_closure_entry(dyntracer_t *dyntracer, const SEXP call, const SEXP op,
                          const SEXP args, const SEXP rho);
@@ -113,4 +114,4 @@ void probe_environment_variable_lookup(dyntracer_t *dyntracer,
 void probe_environment_variable_exists(dyntracer_t *dyntracer,
                                        const SEXP symbol, const SEXP rho);
 
-#endif /* __PROBES_H__ */
+#endif /* EVALDYNTRACER_PROBES_H */

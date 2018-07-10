@@ -1,11 +1,11 @@
-#ifndef __TRACER_H__
-#define __TRACER_H__
+#ifndef EVALDYNTRACER_TRACER_H
+#define EVALDYNTRACER_TRACER_H
+
+#include "Rincludes.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#include "Rincludes.h"
 
 SEXP create_dyntracer(SEXP evals, SEXP raw_analysis_dirpath,
                       SEXP analysis_flags, SEXP verbose);
@@ -16,4 +16,4 @@ SEXP destroy_dyntracer(SEXP dyntracer);
 }
 #endif
 
-#endif /* __TRACER_H__ */
+#endif /* EVALDYNTRACER_TRACER_H */

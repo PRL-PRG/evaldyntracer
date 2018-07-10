@@ -1,5 +1,5 @@
-#ifndef __UTILITIES_H__
-#define __UTILITIES_H__
+#ifndef EVALDYNTRACER_UTILITIES_H
+#define EVALDYNTRACER_UTILITIES_H
 
 #include "Rincludes.h"
 #include <cstdlib>
@@ -19,6 +19,11 @@ inline bool index_logical_rvector(const SEXP rvector, size_t index = 0) {
 
 inline int index_real_rvector(const SEXP rvector, size_t index = 0) {
     return REAL(rvector)[index];
+}
+
+inline unsigned int index_integer_rvector(const SEXP rvector,
+                                          size_t index = 0) {
+    return INTEGER(rvector)[index];
 }
 
 inline std::string index_character_rvector(const SEXP rvector,
@@ -57,4 +62,14 @@ rlist_to_map(SEXP rlist, std::function<Value(SEXP)> transformer) {
     return mapping;
 }
 
-#endif /* __UTILITIES_H__ **/
+inline void
+transform_rlist(SEXP rlist,
+                std::function<void(std::string, SEXP)> accumulator) {
+    SEXP keys = getAttrib(rlist, R_NamesSymbol);
+    for (int index = 0; index < LENGTH(rlist); ++index) {
+        accumulator(index_character_rvector(keys, index),
+                    VECTOR_ELT(rlist, index));
+    }
+}
+
+#endif /* EVALDYNTRACER_UTILITIES_H */

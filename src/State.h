@@ -1,5 +1,5 @@
-#ifndef __STATE_H__
-#define __STATE_H__
+#ifndef EVALDYNTRACER_STATE_H
+#define EVALDYNTRACER_STATE_H
 
 #include "AnalysisDriver.h"
 #include "Configuration.h"
@@ -19,4 +19,4 @@ class State {
     std::unique_ptr<AnalysisDriver> analysis_driver_;
 };
 
-#endif /* __STATE_H__ */
+#endif /* EVALDYNTRACER_STATE_H */

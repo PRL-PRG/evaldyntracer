@@ -1,5 +1,5 @@
-#ifndef __TABLE_WRITER_H__
-#define __TABLE_WRITER_H__
+#ifndef EVALDYNTRACER_TABLE_WRITER_H
+#define EVALDYNTRACER_TABLE_WRITER_H
 
 #include "Configuration.h"
 #include "Rincludes.h"
@@ -70,4 +70,4 @@ class TableWriter {
     static const std::string row_separator_;
 };
 
-#endif /* __TABLE_WRITER_H__ */
+#endif /* EVALDYNTRACER_TABLE_WRITER_H */

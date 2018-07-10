@@ -1,6 +1,7 @@
 R_DYNTRACE_HOME := ../R-dyntrace
 R_DYNTRACE := $(R_DYNTRACE_HOME)/bin/R
 R_CMD_CHECK_OUTPUT_DIRPATH := /tmp
+CLANG_TIDY := clang-tidy
 
 export R_ENABLE_JIT=0
 export R_DISABLE_BYTECODE=1
@@ -29,8 +30,10 @@ check: build
 test:
 	$(R_DYNTRACE) -e "devtools::test()"
 
-
 install-dependencies:
 	$(R_DYNTRACE) -e "install.packages(c('withr', 'testthat', 'devtools', 'roxygen2'), repos='http://cran.us.r-project.org')"
+
+analyze:
+	$(CLANG_TIDY) -checks='*,-fuchsia-default-arguments,-misc-unused-parameters,-misc-misplaced-const' -header-filter="^src/.*" -p . src/*.cpp
 
 .PHONY: all build install clean document check test install-dependencies
