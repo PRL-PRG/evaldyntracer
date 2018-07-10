@@ -1,5 +1,5 @@
-#ifndef __CLOSURE_EXECUTION_CONTEXT_H__
-#define __CLOSURE_EXECUTION_CONTEXT_H__
+#ifndef EVALDYNTRACER_CLOSURE_EXECUTION_CONTEXT_H
+#define EVALDYNTRACER_CLOSURE_EXECUTION_CONTEXT_H
 
 #include "FunctionExecutionContext.h"
 #include "sexptype.h"
@@ -25,4 +25,4 @@ class ClosureExecutionContext : public FunctionExecutionContext {
     const sexptype_t get_type() const override { return CLOSXP; }
 };
 
-#endif /* __CLOSURE_EXECUTION_CONTEXT_H__ */
+#endif /* EVALDYNTRACER_CLOSURE_EXECUTION_CONTEXT_H */

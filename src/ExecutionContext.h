@@ -1,5 +1,5 @@
-#ifndef __EXECUTION_CONTEXT_H__
-#define __EXECUTION_CONTEXT_H__
+#ifndef EVALDYNTRACER_EXECUTION_CONTEXT_H
+#define EVALDYNTRACER_EXECUTION_CONTEXT_H
 
 #include "sexptype.h"
 #include <string>
@@ -15,4 +15,4 @@ class ExecutionContext {
     virtual ~ExecutionContext() {}
 };
 
-#endif /* __EXECUTION_CONTEXT_H__ */
+#endif /* EVALDYNTRACER_EXECUTION_CONTEXT_H */

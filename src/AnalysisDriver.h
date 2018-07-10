@@ -1,5 +1,5 @@
-#ifndef __ANALYSIS_DRIVER_H__
-#define __ANALYSIS_DRIVER_H__
+#ifndef EVALDYNTRACER_ANALYSIS_DRIVER_H
+#define EVALDYNTRACER_ANALYSIS_DRIVER_H
 
 #include "Configuration.h"
 #include "EvalExpressionAnalysis.h"
@@ -47,4 +47,4 @@ class AnalysisDriver {
     EvalExpressionAnalysis eval_expression_analysis_;
 };
 
-#endif /* __ANALYSIS_DRIVER_H__ */
+#endif /* EVALDYNTRACER_ANALYSIS_DRIVER_H */

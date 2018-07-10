@@ -1,5 +1,5 @@
-#ifndef __CONFIGURATION_H__
-#define __CONFIGURATION_H__
+#ifndef EVALDYNTRACER_CONFIGURATION_H
+#define EVALDYNTRACER_CONFIGURATION_H
 
 #include "Rincludes.h"
 #include "utilities.h"
@@ -99,4 +99,4 @@ class Configuration {
     std::string git_commit_info_;
 };
 
-#endif /* __CONFIGURATION_H__ */
+#endif /* EVALDYNTRACER_CONFIGURATION_H */

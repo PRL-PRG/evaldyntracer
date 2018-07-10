@@ -1,5 +1,5 @@
-#ifndef __TOP_LEVEL_EXECUTION_CONTEXT_H__
-#define __TOP_LEVEL_EXECUTION_CONTEXT_H__
+#ifndef EVALDYNTRACER_TOP_LEVEL_EXECUTION_CONTEXT_H
+#define EVALDYNTRACER_TOP_LEVEL_EXECUTION_CONTEXT_H
 
 #include "ExecutionContext.h"
 #include "sexptype.h"
@@ -32,4 +32,4 @@ class TopLevelExecutionContext : public ExecutionContext {
     int error_;
 };
 
-#endif /* __TOP_LEVEL_EXECUTION_CONTEXT_H__ */
+#endif /* EVALDYNTRACER_TOP_LEVEL_EXECUTION_CONTEXT_H */

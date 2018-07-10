@@ -6,41 +6,8 @@
 
 class SourceLocation {
   public:
-    explicit SourceLocation(SEXP function, SEXP environment = R_GlobalEnv)
-        : line_number_{0}, column_number_{0}, directory_path_{""},
-          filename_{""} {
-        dyntrace_enable_privileged_mode();
-
-        SEXP line_number;
-        PROTECT(line_number = Rf_eval(lang3(install("getSrcLocation"), function,
-                                            ScalarString(mkChar("line"))),
-                                      environment));
-        if (LENGTH(line_number) > 0)
-            line_number_ = index_integer_rvector(line_number);
-
-        SEXP column_number;
-        PROTECT(column_number =
-                    Rf_eval(lang3(install("getSrcLocation"), function,
-                                  ScalarString(mkChar("column"))),
-                            environment));
-        if (LENGTH(column_number) > 0)
-            column_number_ = index_integer_rvector(column_number);
-
-        SEXP directory_path;
-        PROTECT(directory_path = Rf_eval(
-                    lang2(install("getSrcDirectory"), function), environment));
-        if (LENGTH(directory_path) > 0)
-            directory_path_ = index_character_rvector(directory_path);
-
-        SEXP filename;
-        PROTECT(filename = Rf_eval(lang2(install("getSrcFilename"), function),
-                                   environment));
-        if (LENGTH(filename) > 0)
-            filename_ = index_character_rvector(filename);
-
-        UNPROTECT(4);
-        dyntrace_disable_privileged_mode();
-    }
+    static SourceLocation of_function(SEXP function,
+                                      SEXP environment = R_GlobalEnv);
 
     unsigned int get_line_number() const { return line_number_; }
 
@@ -51,6 +18,21 @@ class SourceLocation {
     const std::string &get_filename() const { return filename_; }
 
   private:
+    explicit SourceLocation(unsigned int line_number,
+                            unsigned int column_number,
+                            const std::string &directory_path,
+                            const std::string &filename)
+        : line_number_{line_number}, column_number_{column_number},
+          directory_path_{directory_path}, filename_{filename} {}
+
+    static unsigned int get_line_number_(SEXP function, SEXP environment);
+
+    static unsigned int get_column_number_(SEXP function, SEXP environment);
+
+    static std::string get_directory_path_(SEXP function, SEXP environment);
+
+    static std::string get_filename_(SEXP function, SEXP environment);
+
     unsigned int line_number_;
     unsigned int column_number_;
     std::string directory_path_;

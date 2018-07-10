@@ -1,5 +1,5 @@
-#ifndef __EVAL_EXPRESSION_ANALYSIS_H__
-#define __EVAL_EXPRESSION_ANALYSIS_H__
+#ifndef EVALDYNTRACER_EVAL_EXPRESSION_ANALYSIS_H
+#define EVALDYNTRACER_EVAL_EXPRESSION_ANALYSIS_H
 
 #include "Configuration.h"
 #include "ExecutionContextStack.h"
@@ -33,4 +33,4 @@ class EvalExpressionAnalysis {
     std::vector<opcount_t> opcounts_;
 };
 
-#endif /* __EVAL_EXPRESSION_ANALYSIS_H__ */
+#endif /* EVALDYNTRACER_EVAL_EXPRESSION_ANALYSIS_H */

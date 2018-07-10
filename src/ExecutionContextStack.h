@@ -1,5 +1,5 @@
-#ifndef __EXECUTION_CONTEXT_STACK_H__
-#define __EXECUTION_CONTEXT_STACK_H__
+#ifndef EVALDYNTRACER_EXECUTION_CONTEXT_STACK_H
+#define EVALDYNTRACER_EXECUTION_CONTEXT_STACK_H
 
 #include "BuiltinExecutionContext.h"
 #include "ClosureExecutionContext.h"
@@ -91,4 +91,4 @@ class ExecutionContextStack {
     execution_contexts_t stack_;
 };
 
-#endif /* __EXECUTION_CONTEXT_STACK_H__ */
+#endif /* EVALDYNTRACER_EXECUTION_CONTEXT_STACK_H */

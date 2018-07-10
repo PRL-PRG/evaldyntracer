@@ -1,5 +1,5 @@
-#ifndef __PROBES_H__
-#define __PROBES_H__
+#ifndef EVALDYNTRACER_PROBES_H
+#define EVALDYNTRACER_PROBES_H
 
 #define R_INLINES_H_
 #include "State.h"
@@ -114,4 +114,4 @@ void probe_environment_variable_lookup(dyntracer_t *dyntracer,
 void probe_environment_variable_exists(dyntracer_t *dyntracer,
                                        const SEXP symbol, const SEXP rho);
 
-#endif /* __PROBES_H__ */
+#endif /* EVALDYNTRACER_PROBES_H */

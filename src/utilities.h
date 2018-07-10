@@ -1,5 +1,5 @@
-#ifndef __UTILITIES_H__
-#define __UTILITIES_H__
+#ifndef EVALDYNTRACER_UTILITIES_H
+#define EVALDYNTRACER_UTILITIES_H
 
 #include "Rincludes.h"
 #include <cstdlib>
@@ -72,4 +72,4 @@ transform_rlist(SEXP rlist,
     }
 }
 
-#endif /* __UTILITIES_H__ **/
+#endif /* EVALDYNTRACER_UTILITIES_H */

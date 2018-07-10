@@ -58,7 +58,8 @@ void EvalExpressionAnalysis::closure_exit(
     std::string filename;
 
     if (caller_function != nullptr) {
-        SourceLocation source_location{caller_function};
+        SourceLocation source_location{
+            SourceLocation::of_function(caller_function)};
         line_number = source_location.get_line_number();
         column_number = source_location.get_column_number();
         directory_path = source_location.get_directory_path().c_str();

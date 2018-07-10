@@ -1,5 +1,5 @@
-#ifndef __SPECIAL_EXECUTION_CONTEXT_H__
-#define __SPECIAL_EXECUTION_CONTEXT_H__
+#ifndef EVALDYNTRACER_SPECIAL_EXECUTION_CONTEXT_H
+#define EVALDYNTRACER_SPECIAL_EXECUTION_CONTEXT_H
 
 #include "FunctionExecutionContext.h"
 #include "sexptype.h"
@@ -14,4 +14,4 @@ class SpecialExecutionContext : public FunctionExecutionContext {
     const sexptype_t get_type() const override { return SPECIALSXP; }
 };
 
-#endif /* __SPECIAL_EXECUTION_CONTEXT_H__ */
+#endif /* EVALDYNTRACER_SPECIAL_EXECUTION_CONTEXT_H */

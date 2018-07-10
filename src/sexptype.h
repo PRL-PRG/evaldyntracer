@@ -1,5 +1,5 @@
-#ifndef __SEXPTYPE_H__
-#define __SEXPTYPE_H__
+#ifndef EVALDYNTRACER_SEXPTYPE_H
+#define EVALDYNTRACER_SEXPTYPE_H
 
 #include <Rinternals.h>
 
@@ -29,4 +29,4 @@ inline std::string sexptype_to_string(const sexptype_t sexptype) {
     }
 }
 
-#endif /* __SEXPTYPE_H__ */
+#endif /* EVALDYNTRACER_SEXPTYPE_H */

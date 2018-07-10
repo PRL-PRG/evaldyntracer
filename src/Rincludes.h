@@ -1,5 +1,5 @@
-#ifndef __R_INCLUDES_H__
-#define __R_INCLUDES_H__
+#ifndef EVALDYNTRACER_R_INCLUDES_H
+#define EVALDYNTRACER_R_INCLUDES_H
 
 #define USE_RINTERNALS
 #include <Rinternals.h>
@@ -17,4 +17,4 @@
 #include <Defn.h>
 #include <Rdyntrace.h>
 
-#endif /* __R_INCLUDES_H__ */
+#endif /* EVALDYNTRACER_R_INCLUDES_H */

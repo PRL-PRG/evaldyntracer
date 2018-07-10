@@ -1,5 +1,5 @@
-#ifndef __TRACER_H__
-#define __TRACER_H__
+#ifndef EVALDYNTRACER_TRACER_H
+#define EVALDYNTRACER_TRACER_H
 
 #include "Rincludes.h"
 
@@ -16,4 +16,4 @@ SEXP destroy_dyntracer(SEXP dyntracer);
 }
 #endif
 
-#endif /* __TRACER_H__ */
+#endif /* EVALDYNTRACER_TRACER_H */

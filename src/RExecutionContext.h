@@ -1,5 +1,5 @@
-#ifndef __R_EXECUTION_CONTEXT_H__
-#define __R_EXECUTION_CONTEXT_H__
+#ifndef EVALDYNTRACER_R_EXECUTION_CONTEXT_H
+#define EVALDYNTRACER_R_EXECUTION_CONTEXT_H
 
 #include "ExecutionContext.h"
 #include "sexptype.h"
@@ -29,4 +29,4 @@ class RExecutionContext : public ExecutionContext {
     const RCNTXT *context_;
 };
 
-#endif /* __TOP_LEVEL_EXECUTION_CONTEXT_H__ */
+#endif /* EVALDYNTRACER_R_EXECUTION_CONTEXT_H */

@@ -1,5 +1,5 @@
-#ifndef __BUILTIN_EXECUTION_CONTEXT_H__
-#define __BUILTIN_EXECUTION_CONTEXT_H__
+#ifndef EVALDYNTRACER_BUILTIN_EXECUTION_CONTEXT_H
+#define EVALDYNTRACER_BUILTIN_EXECUTION_CONTEXT_H
 
 #include "FunctionExecutionContext.h"
 #include "sexptype.h"
@@ -14,4 +14,4 @@ class BuiltinExecutionContext : public FunctionExecutionContext {
     const sexptype_t get_type() const override { return BUILTINSXP; }
 };
 
-#endif /* __BUILTIN_EXECUTION_CONTEXT_H__ */
+#endif /* EVALDYNTRACER_BUILTIN_EXECUTION_CONTEXT_H */
